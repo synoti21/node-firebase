@@ -1,5 +1,5 @@
 import {FirebaseOptions, FirebaseApp, initializeApp} from "firebase/app";
-import {getFirestore, setDoc, addDoc, Firestore, collection} from "firebase/firestore";
+import {getFirestore, getDocs, getDoc, addDoc,doc, Firestore, collection} from "firebase/firestore";
 import {documentBody} from "./dataInterface";
 
 import dotenv from "dotenv";
@@ -23,8 +23,6 @@ export const initFirebase = () => {
 
 export const addPost =  async (collectionName: string, NEW_DATA: documentBody) => {
 
-    const collectionRef = collection(firebaseDB, collectionName);
-
     const NEW_DATA_JSON = {
         "title" : NEW_DATA.title,
         "context" : NEW_DATA.context,
@@ -33,15 +31,32 @@ export const addPost =  async (collectionName: string, NEW_DATA: documentBody) =
         "tag" : NEW_DATA.tag
     }
 
-    const docSnap = await addDoc(collectionRef, NEW_DATA_JSON);
-    return docSnap.id;
+    const docSnap = await addDoc(collection(firebaseDB, collectionName), NEW_DATA_JSON);
+    return docSnap.id
 }
 
-export const getPost = () => {
+export const getPost = async (collectionName: string) => {
+    let postArr : Array<string> = [];
+
+    try{
+        const querySnapshot = await getDocs(collection(firebaseDB, collectionName));
+        querySnapshot.forEach((doc) => {
+            postArr.push(doc.id);
+        })
+        return postArr
+
+    }catch(e){
+        console.log("no collection name");
+        return postArr
+    }
 
 }
 
-export const getPostData = () => {
-
+export const getPostData = async (collectionName: string, documentId: string) => {
+    const docSnap = await getDoc(doc(firebaseDB, collectionName, documentId));
+    if(docSnap.exists()){
+        console.log(docSnap.data())
+        return docSnap.data();
+    }
 }
 
