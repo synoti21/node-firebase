@@ -141,6 +141,7 @@ extension MainScreenViewController: UICollectionViewDelegateFlowLayout {
         let navVC = BulletinBoardViewController()
         navVC.boardTitle = boardContext[indexPath.row].boardTitle
         self.navigationController?.pushViewController(navVC, animated: true)
+        
     }
     
 }

@@ -140,4 +140,11 @@ extension BulletinBoardViewController: UITableViewDataSource, UITableViewDelegat
         return view.frame.width * (109/350)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let navVC = PostViewController()
+        navVC.targetPost = postList[indexPath.row]
+        self.navigationController?.pushViewController(navVC, animated: true)
+    }
+    
 }
