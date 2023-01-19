@@ -87,6 +87,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadContext()
+        setupDelegate()
         addview()
         setLayout()
         setAttributes()
@@ -99,11 +100,6 @@ class PostViewController: UIViewController {
         print(postData)
         
         guard let postDate = String(describing: postData.date).toDate() else {return}
-        
-
-        
-       
-       
         
         postTitle.text = postData.title
         writerLabel.text = postData.writer
@@ -120,6 +116,12 @@ class PostViewController: UIViewController {
             view.addSubview($0)
         }
        
+    }
+    
+    private func setupDelegate(){
+        postTag.dataSource = self
+        postTag.delegate = self
+        postTag.register(PostTagCollectionViewCell.self, forCellWithReuseIdentifier: PostTagCollectionViewCell.identifier)
     }
     
     private func setLayout(){
@@ -185,6 +187,58 @@ class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
   }
 }
 
+extension PostViewController: UICollectionViewDataSource{
+    
+    // MARK: - 셀 갯수 구하기
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        guard let post = targetPost else {return 0}
+        return post.tag.count
+        
+    }
+    
+    // MARK: - 셀 정보 설정
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            
+        let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PostTagCollectionViewCell.identifier,
+                for: indexPath) as! PostTagCollectionViewCell ///FoodCell로 Downcasting
+            
+        if let post = targetPost{
+            let tag = post.tag[indexPath.row]
+            cell.setup(with: tag)
+            return cell
+        }
+            
+            
+        return cell
+    }
+}
+// MARK: - 해쉬태그 콜렉션 뷰 Delegate 설정 -> 버튼 선택 시 색 변경, 최대 선택수 제한, 셀 크기 글자 수에 맞춰 크기 설정
+extension PostViewController: UICollectionViewDelegateFlowLayout {
+    
+    
+    
+    // MARK: - 각 셀들의 크기를 글자 수에 맞게 설정하기 위한 함수
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var str: String
+        if let post = targetPost{
+            str = post.tag[indexPath.row]
+            let font: UIFont = .systemFont(ofSize: 15.0)
+            let size: CGSize = str.size(withAttributes: [NSAttributedString.Key.font: font])
+
+            return CGSize(width: size.width+40, height: size.height+4)
+        }
+        
+        return CGSize()
+        
+    }
+}
+// MARK: - 해쉬 태그 콜렉션 뷰 셀들을 왼쪽으로 정렬하기
+
 extension String {
     func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
         let dateFormatter = DateFormatter()
@@ -201,7 +255,7 @@ extension String {
 extension Date {
     func toString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
+        dateFormatter.dateFormat = "yyyyjMMdd"
         return dateFormatter.string(from: self)
     }
 }

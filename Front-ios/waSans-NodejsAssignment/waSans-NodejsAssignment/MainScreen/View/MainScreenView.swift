@@ -56,6 +56,19 @@ class MainScreenViewController: UIViewController {
         return collectionView
     }()
     
+    let newPostButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("새 게시글", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .primaryColor
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18.0)
+        button.layer.cornerRadius = 20.0
+        button.layer.cornerCurve = .continuous
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -64,6 +77,7 @@ class MainScreenViewController: UIViewController {
         setAttributes()
         
     }
+    
     
     private func setupCollectionView(){
         bulletinCollectionView.delegate = self
@@ -76,7 +90,7 @@ class MainScreenViewController: UIViewController {
             view.addSubview($0)
         })
         
-        [sansTItle, bulletinCollectionView].forEach({
+        [sansTItle, bulletinCollectionView, newPostButton].forEach({
             mainFrame.addSubview($0)
         })
     }
@@ -103,6 +117,13 @@ class MainScreenViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview()
         }
+        
+        newPostButton.snp.makeConstraints{
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.snp.bottom).offset(-30)
+        }
+    
+        newPostButton.heightAnchor.constraint(equalTo: newPostButton.widthAnchor, multiplier: 60/350).isActive = true
     }
     
     private func setAttributes(){
