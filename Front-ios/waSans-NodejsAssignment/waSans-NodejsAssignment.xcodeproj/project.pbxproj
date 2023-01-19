@@ -26,7 +26,7 @@
 		3F55A1FF29742FFE004F356B /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1FE29742FFE004F356B /* APIConstant.swift */; };
 		3F55A201297445DF004F356B /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A200297445DF004F356B /* BoardTableViewCell.swift */; };
 		3F9C349C2979C8A9004C5A90 /* PostTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C349B2979C8A9004C5A90 /* PostTagCollectionViewCell.swift */; };
-		3F9C349E2979CD62004C5A90 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C349D2979CD62004C5A90 /* NewPostViewController.swift */; };
+		3F9C349E2979CD62004C5A90 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C349D2979CD62004C5A90 /* NewPostView.swift */; };
 		3FDCBB30297859DB00E8C842 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDCBB2F297859DB00E8C842 /* PostView.swift */; };
 		A95558B1317F988A7115E67D /* Pods_waSans_NodejsAssignment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3825BED2A070968642AE65 /* Pods_waSans_NodejsAssignment.framework */; };
 		EEC456F4C243DD47D4FA7BD9 /* Pods_waSans_NodejsAssignment_waSans_NodejsAssignmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDE0D93B338D290CC39170E /* Pods_waSans_NodejsAssignment_waSans_NodejsAssignmentUITests.framework */; };
@@ -75,7 +75,7 @@
 		3F55A1FE29742FFE004F356B /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
 		3F55A200297445DF004F356B /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		3F9C349B2979C8A9004C5A90 /* PostTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagCollectionViewCell.swift; sourceTree = "<group>"; };
-		3F9C349D2979CD62004C5A90 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		3F9C349D2979CD62004C5A90 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		3FDCBB2F297859DB00E8C842 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		55F2BDB6C56E0664B5D692D3 /* Pods-waSans-NodejsAssignment-waSans-NodejsAssignmentUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waSans-NodejsAssignment-waSans-NodejsAssignmentUITests.release.xcconfig"; path = "Target Support Files/Pods-waSans-NodejsAssignment-waSans-NodejsAssignmentUITests/Pods-waSans-NodejsAssignment-waSans-NodejsAssignmentUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6F3825BED2A070968642AE65 /* Pods_waSans_NodejsAssignment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_waSans_NodejsAssignment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,7 +201,7 @@
 				3F55A1BF297071CB004F356B /* MainScreenView.swift */,
 				3F55A1F72971B19C004F356B /* BulletinBoardView.swift */,
 				3FDCBB2F297859DB00E8C842 /* PostView.swift */,
-				3F9C349D2979CD62004C5A90 /* NewPostViewController.swift */,
+				3F9C349D2979CD62004C5A90 /* NewPostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 				3FDCBB30297859DB00E8C842 /* PostView.swift in Sources */,
 				3F55A201297445DF004F356B /* BoardTableViewCell.swift in Sources */,
 				3F55A1EE29718683004F356B /* BoardCell.swift in Sources */,
-				3F9C349E2979CD62004C5A90 /* NewPostViewController.swift in Sources */,
+				3F9C349E2979CD62004C5A90 /* NewPostView.swift in Sources */,
 				3F55A1FD2971BD07004F356B /* BoardService.swift in Sources */,
 				3F55A1C0297071CB004F356B /* MainScreenView.swift in Sources */,
 				3F55A1EC297075BA004F356B /* UIColorExtension.swift in Sources */,

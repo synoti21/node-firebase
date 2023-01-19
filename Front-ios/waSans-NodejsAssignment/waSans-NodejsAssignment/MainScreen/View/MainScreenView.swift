@@ -124,10 +124,17 @@ class MainScreenViewController: UIViewController {
         }
     
         newPostButton.heightAnchor.constraint(equalTo: newPostButton.widthAnchor, multiplier: 60/350).isActive = true
+        
+        newPostButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
     private func setAttributes(){
         view.backgroundColor = .primaryColor
+    }
+    
+    @objc private func didTapButton(){
+        let navVc = NewPostViewController()
+        self.navigationController?.pushViewController(navVc, animated: true)
     }
 
 }
