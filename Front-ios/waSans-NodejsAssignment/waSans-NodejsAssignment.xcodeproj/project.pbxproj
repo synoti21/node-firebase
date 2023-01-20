@@ -19,7 +19,7 @@
 		3F55A1DF297071CE004F356B /* waSans_NodejsAssignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1DE297071CE004F356B /* waSans_NodejsAssignmentUITestsLaunchTests.swift */; };
 		3F55A1EC297075BA004F356B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1EB297075BA004F356B /* UIColorExtension.swift */; };
 		3F55A1EE29718683004F356B /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1ED29718683004F356B /* BoardCell.swift */; };
-		3F55A1F6297189DB004F356B /* boardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1F5297189DB004F356B /* boardModel.swift */; };
+		3F55A1F6297189DB004F356B /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1F5297189DB004F356B /* BoardModel.swift */; };
 		3F55A1F82971B19C004F356B /* BulletinBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1F72971B19C004F356B /* BulletinBoardView.swift */; };
 		3F55A1FB2971B78D004F356B /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1FA2971B78D004F356B /* PostModel.swift */; };
 		3F55A1FD2971BD07004F356B /* BoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55A1FC2971BD07004F356B /* BoardService.swift */; };
@@ -70,7 +70,7 @@
 		3F55A1DE297071CE004F356B /* waSans_NodejsAssignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = waSans_NodejsAssignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3F55A1EB297075BA004F356B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		3F55A1ED29718683004F356B /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
-		3F55A1F5297189DB004F356B /* boardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boardModel.swift; sourceTree = "<group>"; };
+		3F55A1F5297189DB004F356B /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
 		3F55A1F72971B19C004F356B /* BulletinBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinBoardView.swift; sourceTree = "<group>"; };
 		3F55A1FA2971B78D004F356B /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		3F55A1FC2971BD07004F356B /* BoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardService.swift; sourceTree = "<group>"; };
@@ -142,7 +142,10 @@
 		3F55A1BA297071CB004F356B /* waSans-NodejsAssignment */ = {
 			isa = PBXGroup;
 			children = (
+				3F55A1F42971892D004F356B /* Service */,
 				3F55A1F129718902004F356B /* MainScreen */,
+				3F9C34A7297AED95004C5A90 /* ViewPost */,
+				3F9C34A3297AED34004C5A90 /* UploadPost */,
 				3F55A1F0297188F6004F356B /* Common */,
 				3F55A1EF297188EC004F356B /* Lifecycle */,
 				3F55A1C1297071CB004F356B /* Main.storyboard */,
@@ -191,10 +194,9 @@
 		3F55A1F129718902004F356B /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				3F55A1F42971892D004F356B /* Service */,
-				3F55A1F329718921004F356B /* Cell */,
-				3F55A1F22971891C004F356B /* View */,
 				3F55A1F92971B77F004F356B /* Model */,
+				3F55A1F22971891C004F356B /* View */,
+				3F55A1F329718921004F356B /* Cell */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -203,10 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				3F55A1BF297071CB004F356B /* MainScreenView.swift */,
-				3F55A1F72971B19C004F356B /* BulletinBoardView.swift */,
-				3FDCBB2F297859DB00E8C842 /* PostView.swift */,
-				3F9C349D2979CD62004C5A90 /* NewPostView.swift */,
-				3F9C34A1297AE00C004C5A90 /* PostCompleteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,9 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				3F55A1ED29718683004F356B /* BoardCell.swift */,
-				3F55A200297445DF004F356B /* BoardTableViewCell.swift */,
-				3F9C349B2979C8A9004C5A90 /* PostTagCollectionViewCell.swift */,
-				3F9C349F297ACCE7004C5A90 /* PostTypeCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -233,10 +228,79 @@
 		3F55A1F92971B77F004F356B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3F55A1F5297189DB004F356B /* boardModel.swift */,
+				3F55A1F5297189DB004F356B /* BoardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3F9C34A3297AED34004C5A90 /* UploadPost */ = {
+			isa = PBXGroup;
+			children = (
+				3F9C34A6297AED5A004C5A90 /* Model */,
+				3F9C34A5297AED51004C5A90 /* View */,
+				3F9C34A4297AED41004C5A90 /* Cell */,
+			);
+			path = UploadPost;
+			sourceTree = "<group>";
+		};
+		3F9C34A4297AED41004C5A90 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3F9C349F297ACCE7004C5A90 /* PostTypeCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3F9C34A5297AED51004C5A90 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3F9C349D2979CD62004C5A90 /* NewPostView.swift */,
+				3F9C34A1297AE00C004C5A90 /* PostCompleteView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3F9C34A6297AED5A004C5A90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3F9C34A7297AED95004C5A90 /* ViewPost */ = {
+			isa = PBXGroup;
+			children = (
+				3F9C34A8297AEDAA004C5A90 /* Model */,
+				3F9C34A9297AEDB2004C5A90 /* View */,
+				3F9C34AA297AEDB6004C5A90 /* Cell */,
+			);
+			path = ViewPost;
+			sourceTree = "<group>";
+		};
+		3F9C34A8297AEDAA004C5A90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				3F55A1FA2971B78D004F356B /* PostModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3F9C34A9297AEDB2004C5A90 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3FDCBB2F297859DB00E8C842 /* PostView.swift */,
+				3F55A1F72971B19C004F356B /* BulletinBoardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3F9C34AA297AEDB6004C5A90 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3F55A200297445DF004F356B /* BoardTableViewCell.swift */,
+				3F9C349B2979C8A9004C5A90 /* PostTagCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		706ED5D3809DDD4BBF2DEA41 /* Pods */ = {
@@ -512,7 +576,7 @@
 				3F55A1EC297075BA004F356B /* UIColorExtension.swift in Sources */,
 				3F55A1BC297071CB004F356B /* AppDelegate.swift in Sources */,
 				3F55A1F82971B19C004F356B /* BulletinBoardView.swift in Sources */,
-				3F55A1F6297189DB004F356B /* boardModel.swift in Sources */,
+				3F55A1F6297189DB004F356B /* BoardModel.swift in Sources */,
 				3F55A1FB2971B78D004F356B /* PostModel.swift in Sources */,
 				3F55A1FF29742FFE004F356B /* APIConstant.swift in Sources */,
 				3F9C349C2979C8A9004C5A90 /* PostTagCollectionViewCell.swift in Sources */,
