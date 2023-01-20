@@ -32,6 +32,7 @@ export const addPost =  async (collectionName: string, NEW_DATA: documentBody) =
     }
 
     const docSnap = await addDoc(collection(firebaseDB, collectionName), NEW_DATA_JSON);
+    console.log(docSnap.id)
     return docSnap.id
 }
 
@@ -43,6 +44,7 @@ export const getPost = async (collectionName: string) => {
         querySnapshot.forEach((doc) => {
             postArr.push(doc.id);
         })
+        console.log(postArr)
         return postArr
 
     }catch(e){

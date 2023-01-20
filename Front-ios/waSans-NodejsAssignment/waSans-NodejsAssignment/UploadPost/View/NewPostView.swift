@@ -339,7 +339,7 @@ extension NewPostViewController: UICollectionViewDelegateFlowLayout {
         }
         
     }
- 
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         didDeselectItemAt indexPath: IndexPath) {
