@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 
-class NewPostViewController: UIViewController {
+class NewPostViewController: UIViewController, UITextViewDelegate {
+    
+    let boardSerivce = BoardService()
+    
+    var selectedPostType = "announcement"
     
     let pageTitle: UILabel = {
         let label = UILabel()
@@ -91,7 +95,7 @@ class NewPostViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "태그 (쉼표로 구분)"
         textField.font = .systemFont(ofSize: 18.0)
-        textField.textColor = .lineColor
+        textField.textColor = .black
         textField.textAlignment = .left
         textField.adjustsFontForContentSizeCategory = true
         
@@ -116,9 +120,31 @@ class NewPostViewController: UIViewController {
         
         return button
     }()
+    
+    let postTypeView: UICollectionView = {
+        let viewLayout = LeftAlignedCollectionViewFlowLayout()
+        viewLayout.minimumInteritemSpacing = 12
+        
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: viewLayout)
+        collectionView.isScrollEnabled = false
+        collectionView.collectionViewLayout = viewLayout
+        collectionView.backgroundColor = .white
+        collectionView.allowsMultipleSelection = false
+        
+        return collectionView
+    }()
+    
+    let postTypeArr: [String] = [
+        "공지사항", "자유게시판", "질문과 답변"
+    ]
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDelegate()
         addView()
         setLayout()
         setAttributes()
@@ -126,10 +152,18 @@ class NewPostViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    private func setupDelegate(){
+        postTypeView.delegate = self
+        postTypeView.dataSource = self
+        postTypeView.register(PostTypeCollectionViewCell.self, forCellWithReuseIdentifier: PostTypeCollectionViewCell.identifier)
+    }
+    
     private func addView(){
-        [pageTitle, titleField, titleFieldLine, writerField, writerFieldLine, contextField, dateField, dateFieldLine, tagField, tagFieldLine, uploadButton].forEach({
+        [pageTitle, titleField, titleFieldLine, writerField, writerFieldLine, contextField, dateField, dateFieldLine, tagField, tagFieldLine, uploadButton, postTypeView].forEach({
             view.addSubview($0)
         })
+        
+        contextField.delegate = self
     }
     
     private func setLayout(){
@@ -196,6 +230,12 @@ class NewPostViewController: UIViewController {
             $0.height.equalTo(1)
         }
         
+        postTypeView.snp.makeConstraints{
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(tagFieldLine.snp.bottom).offset(36)
+        }
+        postTypeView.heightAnchor.constraint(equalTo: postTypeView.widthAnchor, multiplier: 35/350).isActive = true
+        
         uploadButton.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().inset(30)
@@ -205,11 +245,30 @@ class NewPostViewController: UIViewController {
         contextField.text = "내용 입력"
         contextField.textColor = .lineColor
         
+        uploadButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        
         
     }
     
     private func setAttributes(){
         view.backgroundColor = .white
+    }
+    
+    @objc private func didTapButton(){
+        let postDate: Int? = Int(dateField.text ?? "")
+        let postTag: [String] = tagField.text?.components(separatedBy: ",") ?? []
+        
+        
+        let targetUploadPost = PostModel(tag: postTag, date: postDate ?? 0, writer: writerField.text ?? "", title: titleField.text ?? "", context: contextField.text ?? "")
+        
+        print(targetUploadPost)
+        print(selectedPostType)
+        
+        boardSerivce.addPost(selectedPostType, targetDocumnet: targetUploadPost) {
+            print("send")
+        }
+        
+        
     }
     
     func textViewDidBeginEditing (_ textView: UITextView) {
@@ -226,6 +285,76 @@ class NewPostViewController: UIViewController {
         }
     }
 
-    
-
 }
+
+
+extension NewPostViewController: UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: PostTypeCollectionViewCell.identifier,
+            for: indexPath) as! PostTypeCollectionViewCell
+        
+        let context = postTypeArr[indexPath.row]
+        cell.setup(with: context)
+        return cell
+    }
+}
+
+extension NewPostViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        
+        
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! PostTypeCollectionViewCell
+        selectedCell.postTypeLabel.textColor = .white
+        selectedCell.contentView.layer.backgroundColor = UIColor.primaryColor.cgColor
+        switch(selectedCell.postTypeLabel.text){
+        case "공지사항":
+            selectedPostType = "announcement"
+        case "자유게시판":
+            selectedPostType = "freeboard"
+        case "질문과 답변":
+            selectedPostType = "qa"
+        default:
+            selectedPostType = ""
+            print("error : no selection")
+        }
+        
+    }
+ 
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        didDeselectItemAt indexPath: IndexPath) {
+        
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! PostTypeCollectionViewCell
+        selectedCell.postTypeLabel.textColor = #colorLiteral(red: 0.4862745098, green: 0.4862745098, blue: 0.4862745098, alpha: 1)
+        selectedCell.contentView.layer.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.8509803922, blue: 0.8509803922, alpha: 1)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var str: String
+        
+        
+        str = postTypeArr[indexPath.row]
+        
+        let font: UIFont = .systemFont(ofSize: 18.0)
+        let size: CGSize = str.size(withAttributes: [NSAttributedString.Key.font: font])
+        
+        return CGSize(width: size.width+28, height: size.height+14)
+    }
+}
+
+

@@ -100,7 +100,7 @@ struct BoardService{
     }
     
     func addPost(_ type: String, targetDocumnet: PostModel, completion: @escaping() -> ()){
-        var request = URLRequest(url: URL(string: APIConstants.baseURL)!)
+        var request = URLRequest(url: URL(string: "\(APIConstants.baseURL)/\(type)/addPost")!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
