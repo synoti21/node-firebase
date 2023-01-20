@@ -264,9 +264,17 @@ class NewPostViewController: UIViewController, UITextViewDelegate {
         print(targetUploadPost)
         print(selectedPostType)
         
-        boardSerivce.addPost(selectedPostType, targetDocumnet: targetUploadPost) {
-            print("send")
+        boardSerivce.addPost(selectedPostType, targetDocumnet: targetUploadPost){response in
+            if(response){
+                let navVc = PostCompleteViewController()
+                self.navigationController?.pushViewController(navVc, animated: true)
+            }else{
+                print("error")
+            }
+            
         }
+        
+        
         
         
     }

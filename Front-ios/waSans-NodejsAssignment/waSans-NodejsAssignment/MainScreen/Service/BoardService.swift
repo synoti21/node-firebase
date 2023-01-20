@@ -99,7 +99,7 @@ struct BoardService{
         
     }
     
-    func addPost(_ type: String, targetDocumnet: PostModel, completion: @escaping() -> ()){
+    func addPost(_ type: String, targetDocumnet: PostModel, completion: @escaping(Bool) -> ()){
         var request = URLRequest(url: URL(string: "\(APIConstants.baseURL)/\(type)/addPost")!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -123,8 +123,10 @@ struct BoardService{
             switch response.result {
             case .success:
                 print("POST 성공")
+                completion(true)
             case .failure(let error):
                 print("error : \(error.errorDescription!)")
+                completion(false)
             }
         }
     }
