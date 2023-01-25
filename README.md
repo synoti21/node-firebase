@@ -1,5 +1,5 @@
 # waSans-BulletinBoard
-<figure class="third">
+<figure class="thrid">
    <a><img width="321" alt="스크린샷 2023-01-25 오후 4 42 04" src="https://user-images.githubusercontent.com/58936172/214508617-04c3c50b-4731-4916-a505-6a995a526536.png"></a>
   <a><img width="318" alt="스크린샷 2023-01-25 오후 4 42 18" src="https://user-images.githubusercontent.com/58936172/214508732-dfbb193a-ba87-4e17-9874-486a85d27a95.png"></a>
   <a><img width="262" alt="스크린샷 2023-01-25 오후 4 42 45" src="https://user-images.githubusercontent.com/58936172/214508756-16578218-c565-4e32-bb9b-46f3c74eee5a.png"></a>
