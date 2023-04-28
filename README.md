@@ -2,7 +2,7 @@
 
 # :skull: WaSans-BulletinBoard
 ***
-> 노드 스터디 백엔드 과제를 iOS 형태의 앱으로 확대 발전
+> 노드 스터디 백엔드 과제를 iOS 형태의 앱으로 확대 발전. iOS 앱과의 연동을 위한 기초적인 수준의 데이터베이스 송수신 정도의 기능을 지니고 있음.
 
 </br>
 
@@ -10,8 +10,6 @@
 ***
 - Firebase
 - Node.js
-- Swift
-- Alamofire
 
 </br>
 
@@ -33,7 +31,7 @@ npm install
 
 ## Usage
 ***
-To start server, run
+To start server, run:
 ~~~console
 npm start
 ~~~
