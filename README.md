@@ -22,3 +22,19 @@
 
 </br>
 
+## Installation
+***
+~~~console
+git clone https://github.com/synoti21/waSans-BulletinBoard_Backend.git
+npm install
+~~~
+
+</br>
+
+## Usage
+***
+To start server, run
+~~~console
+npm start
+~~~
+
